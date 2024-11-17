@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  sql:
+    image: mcr.microsoft.com/azure-sql-edge
+    environment:
+      ACCEPT_EULA: "1"
+      MSSQL_SA_PASSWORD: "Password@1"  # Ensure the password is strong and meets SQL Server requirements
+    ports:
+      - "1433:1433"  # Expose SQL Server port on 1433
+    networks:
+      - sql_network
+
+volumes:
+  sql_data:
+
+networks:
+  sql_network:
