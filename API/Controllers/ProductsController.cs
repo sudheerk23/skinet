@@ -82,7 +82,7 @@ namespace API.Controllers
         {
             var brands = new BrandListSpecifications();
 
-            return Ok(await repo.ListAsyc(brand));
+            return Ok(await repo.ListAsyc(brands));
         }
         
         [HttpGet("types")]
@@ -90,7 +90,7 @@ namespace API.Controllers
         {
             var types = new TypeListSpecificaions();
             
-            return Ok(await repo.ListAsyc(type));
+            return Ok(await repo.ListAsyc(types));
         }
 
     }
