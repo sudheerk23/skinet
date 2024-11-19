@@ -8,10 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
 
-builder.Services.AddDbContext<StoreContent>(obj => {
+builder.Services.AddDbContext<StoreContext>(obj => {
     obj.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
-
+builder.Services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
 builder.Services.AddScoped<IProductRepository,ProductRepository>(); 
  
 var app = builder.Build();
@@ -23,7 +23,7 @@ try
 {
     using var scope = app.Services.CreateScope();
     var services = scope.ServiceProvider;
-    var context = services.GetRequiredService<StoreContent>();
+    var context = services.GetRequiredService<StoreContext>();
     await context.Database.MigrateAsync();
     await StoredContextSeed.SeedAsync(context);
 }catch(Exception ex)

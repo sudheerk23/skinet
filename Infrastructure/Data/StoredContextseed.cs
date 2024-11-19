@@ -9,7 +9,7 @@ namespace Infrastructure.Data
 {
     public class StoredContextSeed
     {
-        public async static Task SeedAsync(StoreContent context)
+        public async static Task SeedAsync(StoreContext context)
         {
             if(!context.products.Any())
             {

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Infrastructure;
 
-public class StoreContent(DbContextOptions dbContext) : DbContext(dbContext)
+public class StoreContext(DbContextOptions dbContext) : DbContext(dbContext)
 {
 
     public DbSet<Product> products { get; set; }
