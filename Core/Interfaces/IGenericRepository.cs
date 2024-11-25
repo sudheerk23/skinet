@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Threading.Tasks;
 using Core.Entities;
@@ -21,7 +22,7 @@ namespace Core.Interfaces
         Task<TResult?> GetEntityWithSpec<TResult>(ISpecifications<T,TResult> spec);
         
         // Task<T> GetBrandAsync
-    
+        Task<int> CountAsync(ISpecifications<T> specifications);
 
 
     }

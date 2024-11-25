@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using API.RequestHelpers;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specifications;
@@ -17,15 +18,15 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ProductsController(IGenericRepository<Product> repo) : Controller
+    public class ProductsController(IGenericRepository<Product> repo) : BaseController
     {
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable>> GetAllProducts(string? brand, string? type,string? sort)
+        public async Task<ActionResult<IEnumerable>> GetAllProducts([FromQuery]ProductSpecParams specParams)
         {
-            var products = new ProductFilterSortSpecification(brand,type,sort);
-            var list = await repo.ListAsyc(products);
-            return Ok(list);
+            var products = new ProductFilterSortSpecification(specParams);
+            
+            return await CreatePagedReesult(repo,products,specParams.PageIndex,specParams.PageSize);
         }
 
         [HttpGet]
